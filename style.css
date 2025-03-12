@@ -77,8 +77,8 @@ header {
   justify-content: space-between;
   align-items: center;
   background-color: transparent;
-  backdrop-filter: none;
   -webkit-backdrop-filter: none;
+  backdrop-filter: none;
   z-index: 1000;
   box-shadow: none;
   transition: padding 0.4s ease, transform 0.4s ease;
@@ -89,8 +89,8 @@ header {
 header.scrolled {
   padding: 15px 50px;
   background-color: rgba(248, 249, 250, 0.7); /* Very subtle background */
-  backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   box-shadow: 0 5px 25px rgba(0, 0, 0, 0.04); /* Very subtle shadow */
 }
 
@@ -380,6 +380,7 @@ nav {
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
   z-index: 1000;
   opacity: 0;
