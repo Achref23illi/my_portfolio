@@ -1,212 +1,334 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const darkModeToggle = document.getElementById("darkModeToggle");
-    const body = document.body;
+document.addEventListener('DOMContentLoaded', function() {
+    // Page transition effect
+    const pageTransition = document.querySelector('.page-transition');
+    
+    // Simulate page load transition
+    pageTransition.classList.add('active');
+    setTimeout(() => {
+        pageTransition.classList.remove('active');
+    }, 500);
+    
+    // Enhanced navbar functionality
     const header = document.querySelector('header');
-    const sections = document.querySelectorAll('section:not(.hero)');
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navBackdrop = document.querySelector('.nav-backdrop');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const body = document.body;
+    let lastScrollTop = 0;
     
-    // Initialize custom cursor
-    createCustomCursor();
-    
-    // Check for previously stored dark mode preference
-    if (localStorage.getItem("darkMode") === "enabled") {
-        body.classList.add("dark-mode");
-        darkModeToggle.textContent = "🌙";
-    } else if (localStorage.getItem("darkMode") === "light") {
-        body.classList.add("light-mode");
-        darkModeToggle.textContent = "☀";
-    }
-
-    darkModeToggle.addEventListener("click", function () {
-        if (body.classList.contains("light-mode")) {
-            body.classList.remove("light-mode");
-            body.classList.add("dark-mode");
-            localStorage.setItem("darkMode", "enabled");
-            darkModeToggle.textContent = "🌙";
-        } else if (body.classList.contains("dark-mode")) {
-            body.classList.remove("dark-mode");
-            body.classList.add("light-mode");
-            localStorage.setItem("darkMode", "light");
-            darkModeToggle.textContent = "☀";
-        } else {
-            body.classList.add("light-mode");
-            localStorage.setItem("darkMode", "light");
-            darkModeToggle.textContent = "☀";
-        }
-    });
-    
-    // Scroll events for animations
+    // Scroll effect for header
     window.addEventListener('scroll', function() {
-        const scrollPosition = window.scrollY;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
-        // Header scroll effect
-        if (scrollPosition > 50) {
+        // Add scrolled class
+        if (scrollTop > 50) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
         }
         
-        // Reveal sections on scroll
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop - window.innerHeight * 0.8;
-            if (scrollPosition > sectionTop) {
-                section.classList.add('appear');
+        // Hide header on scroll down, show on scroll up
+        if (scrollTop > lastScrollTop && scrollTop > 150) {
+            header.style.transform = 'translateY(-100%)';
+        } else {
+            header.style.transform = 'translateY(0)';
+        }
+        
+        lastScrollTop = scrollTop;
+    });
+    
+    // Check initial scroll position
+    if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+    }
+    
+    // Mobile menu toggle
+    function toggleMobileMenu() {
+        body.classList.toggle('mobile-menu-open');
+        
+        if (body.classList.contains('mobile-menu-open')) {
+            body.style.overflow = 'hidden';
+        } else {
+            body.style.overflow = '';
+        }
+    }
+    
+    mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+    navBackdrop.addEventListener('click', toggleMobileMenu);
+    
+    // Close mobile menu when clicking on a link
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            if (body.classList.contains('mobile-menu-open')) {
+                toggleMobileMenu();
             }
         });
     });
     
-    // Trigger initial scroll to activate visible sections
-    setTimeout(() => {
-        window.dispatchEvent(new Event('scroll'));
-    }, 100);
-    
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
+    // Improved active link functionality
+    function setActiveNavLink() {
+        const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Get all sections
+        const sections = document.querySelectorAll('section[id]');
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            const sectionHeight = section.offsetHeight;
+            const sectionId = section.getAttribute('id');
+            const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
             
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    });
-    
-    // Project hover animations
-    const projects = document.querySelectorAll('.project');
-    projects.forEach(project => {
-        project.addEventListener('mouseenter', function() {
-            this.style.animationPlayState = 'paused';
+            if(scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight && navLink) {
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                navLink.classList.add('active');
+            }
         });
         
-        project.addEventListener('mouseleave', function() {
-            this.style.animationPlayState = 'running';
-        });
-    });
-    
-    // Type animation for hero section
-    const heroTitle = document.querySelector('.hero h1 span');
-    if (heroTitle) {
-        const originalText = heroTitle.textContent;
-        heroTitle.textContent = '';
-        
-        setTimeout(() => {
-            typeText(heroTitle, originalText, 100);
-        }, 1000);
+        // If we're at the top of the page and no section is active
+        if(scrollPosition < 100) {
+            const firstLink = document.querySelector('.nav-link');
+            if(firstLink) {
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                firstLink.classList.add('active');
+            }
+        }
     }
     
-    // Add animated background effect
-    createAnimatedBackground();
-});
-
-// Function to create custom cursor
-function createCustomCursor() {
-    const cursor = document.createElement('div');
-    cursor.classList.add('custom-cursor');
-    document.body.appendChild(cursor);
+    // Run setActiveNavLink on load and scroll
+    setActiveNavLink();
+    window.addEventListener('scroll', setActiveNavLink);
     
-    document.addEventListener('mousemove', e => {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-    });
+    // Dark mode toggle functionality
+    const darkModeToggle = document.getElementById('darkModeToggle');
     
-    // Add pulse effect on clickable elements
-    document.querySelectorAll('a, button, .project').forEach(item => {
-        item.addEventListener('mouseenter', () => {
-            cursor.classList.add('active');
-        });
+    // Check for saved theme preference or use system preference
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    const currentTheme = localStorage.getItem('theme');
+    
+    if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+        body.classList.add('dark-mode');
+        darkModeToggle.textContent = '☾';
+    } else {
+        darkModeToggle.textContent = '☀';
+    }
+    
+    // Toggle dark mode
+    darkModeToggle.addEventListener('click', function() {
+        body.classList.toggle('dark-mode');
         
-        item.addEventListener('mouseleave', () => {
-            cursor.classList.remove('active');
-        });
-    });
-}
-
-// Function for typewriter effect
-function typeText(element, text, speed) {
-    let i = 0;
-    const timer = setInterval(() => {
-        if (i < text.length) {
-            element.textContent += text.charAt(i);
-            i++;
+        if (body.classList.contains('dark-mode')) {
+            localStorage.setItem('theme', 'dark');
+            darkModeToggle.textContent = '☾';
         } else {
-            clearInterval(timer);
-            
-            // Add blinking cursor effect
-            const cursor = document.createElement('span');
-            cursor.innerHTML = '|';
-            cursor.style.opacity = '1';
-            cursor.style.marginLeft = '2px';
-            cursor.style.animation = 'blink 1s infinite';
-            element.appendChild(cursor);
-            
-            // Add style for cursor blink
-            const style = document.createElement('style');
-            style.innerHTML = `
-                @keyframes blink {
-                    0%, 100% { opacity: 1; }
-                    50% { opacity: 0; }
-                }
-            `;
-            document.head.appendChild(style);
+            localStorage.setItem('theme', 'light');
+            darkModeToggle.textContent = '☀';
         }
-    }, speed);
-}
-
-// Function to create animated background
-function createAnimatedBackground() {
-    const hero = document.querySelector('.hero');
+    });
     
-    for (let i = 0; i < 20; i++) {
+    // Create animated background particles
+    const particlesContainer = document.querySelector('.moving-particles');
+    const particleCount = 30;
+    
+    for (let i = 0; i < particleCount; i++) {
+        createParticle();
+    }
+    
+    function createParticle() {
         const particle = document.createElement('div');
         particle.classList.add('particle');
         
-        // Random styling
-        const size = Math.random() * 15 + 5;
+        // Random size between 5px and 25px
+        const size = Math.random() * 20 + 5;
+        
+        // Random position
         const posX = Math.random() * 100;
         const posY = Math.random() * 100;
-        const duration = Math.random() * 20 + 10;
-        const delay = Math.random() * 5;
         
+        // Random transparency
+        const opacity = Math.random() * 0.3 + 0.1;
+        
+        // Random animation duration
+        const duration = Math.random() * 20 + 10;
+        
+        // Set particle styles
         particle.style.cssText = `
             position: absolute;
-            top: ${posY}%;
-            left: ${posX}%;
             width: ${size}px;
             height: ${size}px;
-            background-color: rgba(88, 166, 255, ${Math.random() * 0.1});
+            background-color: ${Math.random() > 0.5 ? '#5e17eb' : '#17b1eb'};
             border-radius: 50%;
-            pointer-events: none;
-            opacity: ${Math.random() * 0.6 + 0.2};
-            animation: float ${duration}s ease-in-out infinite;
-            animation-delay: -${delay}s;
-            z-index: 0;
+            left: ${posX}%;
+            top: ${posY}%;
+            opacity: ${opacity};
+            filter: blur(${Math.random() * 2 + 1}px);
+            animation: float ${duration}s linear infinite;
+            animation-delay: -${Math.random() * duration}s;
         `;
         
-        hero.appendChild(particle);
+        particlesContainer.appendChild(particle);
     }
-}
-
-// Add dynamic progress bar at top of page
-function addProgressBar() {
-    const progressBar = document.createElement('div');
-    progressBar.classList.add('progress-bar');
-    progressBar.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 3px;
-        background: linear-gradient(90deg, #58a6ff, #e94560);
-        z-index: 1001;
-        width: 0%;
-        transition: width 0.2s ease;
-    `;
     
-    document.body.appendChild(progressBar);
+    // Add floating animation
+    document.head.insertAdjacentHTML('beforeend', `
+        <style>
+            @keyframes float {
+                0% {
+                    transform: translate(0, 0);
+                }
+                25% {
+                    transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px);
+                }
+                50% {
+                    transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px);
+                }
+                75% {
+                    transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px);
+                }
+                100% {
+                    transform: translate(0, 0);
+                }
+            }
+        </style>
+    `);
     
-    window.addEventListener('scroll', () => {
-        const scrollPercentage = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
-        progressBar.style.width = scrollPercentage + '%';
+    // Scroll reveal animation
+    const animateOnScroll = function() {
+        const elements = document.querySelectorAll('.project, .skills-container span, #contact .contact-form, .section-title');
+        
+        elements.forEach(element => {
+            const elementPosition = element.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight / 1.3;
+            
+            if (elementPosition < screenPosition) {
+                element.classList.add('fade-in');
+                
+                // Add delay for groups of elements
+                if (element.classList.contains('project')) {
+                    const index = Array.from(element.parentNode.children).indexOf(element);
+                    element.style.animationDelay = `${0.1 * (index % 3)}s`;
+                }
+                
+                if (element.parentNode.classList.contains('skills-container')) {
+                    const index = Array.from(element.parentNode.children).indexOf(element);
+                    element.style.animationDelay = `${0.05 * (index % 10)}s`;
+                }
+            }
+        });
+    };
+    
+    // Run once on load
+    animateOnScroll();
+    
+    // Listen for scroll events
+    window.addEventListener('scroll', animateOnScroll);
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                // Add page transition effect
+                pageTransition.classList.add('active');
+                
+                setTimeout(() => {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    setTimeout(() => {
+                        pageTransition.classList.remove('active');
+                    }, 300);
+                }, 300);
+            }
+        });
     });
-}
-
-// Call this function at the end of DOMContentLoaded
-addProgressBar();
+    
+    // Active link indicator
+    const sections = document.querySelectorAll('section[id]');
+    
+    function highlightNavLink() {
+        const scrollY = window.pageYOffset;
+        
+        sections.forEach(section => {
+            const sectionHeight = section.offsetHeight;
+            const sectionTop = section.offsetTop - 100;
+            const sectionId = section.getAttribute('id');
+            
+            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                document.querySelector(`nav a[href="#${sectionId}"]`).classList.add('active');
+            } else {
+                document.querySelector(`nav a[href="#${sectionId}"]`).classList.remove('active');
+            }
+        });
+    }
+    
+    window.addEventListener('scroll', highlightNavLink);
+    
+    // Form input animation
+    const formInputs = document.querySelectorAll('.form-group input, .form-group textarea');
+    
+    formInputs.forEach(input => {
+        input.addEventListener('focus', function() {
+            this.parentNode.classList.add('focused');
+        });
+        
+        input.addEventListener('blur', function() {
+            if (this.value === '') {
+                this.parentNode.classList.remove('focused');
+            }
+        });
+        
+        // Check if input already has value on page load
+        if (input.value !== '') {
+            input.parentNode.classList.add('focused');
+        }
+    });
+    
+    // Update copyright year
+    const yearElement = document.querySelector('.year');
+    if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
+    }
+    
+    // Add hover effect to project cards
+    const projects = document.querySelectorAll('.project');
+    
+    projects.forEach(project => {
+        project.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-10px)';
+            this.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.15)';
+        });
+        
+        project.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = 'var(--box-shadow)';
+        });
+    });
+    
+    // Extra: Add a typing effect to the hero subtitle
+    const heroSubtitle = document.querySelector('.hero h2');
+    const originalText = heroSubtitle.textContent;
+    heroSubtitle.textContent = '';
+    
+    let i = 0;
+    const typeWriter = () => {
+        if (i < originalText.length) {
+            heroSubtitle.textContent += originalText.charAt(i);
+            i++;
+            setTimeout(typeWriter, 50); // Adjust speed here
+        }
+    };
+    
+    // Start typing effect after a small delay
+    setTimeout(typeWriter, 1000);
+});
