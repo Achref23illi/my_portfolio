@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio</title>
-    <meta name="description" content="John Smith - Front End Engineer Portfolio showcasing projects and skills">
+    <meta name="description" content="Arabi Achraf - Full Stack Developer and UI/UX Designer Portfolio showcasing projects and skills">
+    <!-- Add Montserrat font from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script defer src="script.js"></script>
     <!-- Add preload for critical assets -->
@@ -13,14 +17,44 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
 </head>
 <body>
+    <div class="page-transition"></div>
+    <div class="nav-backdrop"></div>
+    
     <header>
-        <div class="logo">Arabi Achraf<span class="logo-dot">.</span></div>
+        <a href="#" class="logo">Arabi Achraf<span class="logo-dot">.</span></a>
+        
+        <button class="mobile-menu-btn" aria-label="Toggle Navigation">
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </button>
+        
         <nav>
-            <ul>
-                <li><a href="#projects" data-text="Projects">Projects</a></li>
-                <li><a href="#skills" data-text="Skills">Skills</a></li>
-                <li><a href="#contact" data-text="Contact">Contact</a></li>
-                <li><button id="darkModeToggle" aria-label="Toggle Dark Mode">☀</button></li>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#projects" class="nav-link">
+                        <i class="fas fa-code-branch nav-icon"></i>Projects
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#skills" class="nav-link">
+                        <i class="fas fa-laptop-code nav-icon"></i>Skills
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">
+                        <i class="fas fa-envelope nav-icon"></i>Contact
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <button class="theme-toggle" id="darkModeToggle" aria-label="Toggle Dark Mode">
+                        <i class="fas fa-sun toggle-icon sun-icon"></i>
+                        <i class="fas fa-moon toggle-icon moon-icon"></i>
+                    </button>
+                </li>
             </ul>
         </nav>
     </header>
@@ -42,14 +76,12 @@
                 </a>
             </div>
         </div>
-        <!-- Animated shapes for background -->
-        <div class="shape shape1"></div>
-        <div class="shape shape2"></div>
-        <div class="shape shape3"></div>
+        <!-- Animated shapes for background will be added via JS -->
+        <div class="moving-particles"></div>
     </section>
     
     <section id="projects">
-        <h2>PROJECTS</h2>
+        <h2 class="section-title">PROJECTS</h2>
         <div class="project-container">
             <div class="project" data-aos="fade-up">
                 <div class="project-image">
@@ -59,7 +91,7 @@
                             <a href="https://github.com/Achref23illi/wassalni-app-memoire" class="icon" aria-label="GitHub Repository">
                                 <i class="fab fa-github"></i>
                             </a>
-                            </div>
+                        </div>
                     </div>
                 </div>
                 <h3>Wassalni App</h3>
@@ -146,12 +178,11 @@
                     <span>BeautifulSoup</span>
                 </div>
             </div>
-            
         </div>
     </section>
     
     <section id="skills">
-        <h2>SKILLS</h2>
+        <h2 class="section-title">SKILLS</h2>
         <div class="skills-container">
             <span>HTML</span>
             <span>CSS</span>
@@ -169,21 +200,28 @@
             <span>Web Accessibility</span>
             <span>SEO</span>
             <span>Performance Optimization</span>
-
             <span>Redux</span>
             <span>Material UI</span>
             <span>Git</span>
-
         </div>
     </section>
     
     <section id="contact">
-        <h2>CONTACT</h2>
+        <h2 class="section-title">CONTACT</h2>
         <p>Interested in working together? Let's connect!</p>
-        <form action="mailto:achraf.arabi@yahoo.com" method="post" enctype="text/plain">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <textarea name="message" placeholder="Your Message" required></textarea>
+        <form action="mailto:achraf.arabi@yahoo.com" method="post" enctype="text/plain" class="contact-form">
+            <div class="form-group">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <span class="focus-border"></span>
+            </div>
+            <div class="form-group">
+                <input type="email" name="email" placeholder="Your Email" required>
+                <span class="focus-border"></span>
+            </div>
+            <div class="form-group">
+                <textarea name="message" placeholder="Your Message" required></textarea>
+                <span class="focus-border"></span>
+            </div>
             <button type="submit" class="btn contact-btn">
                 <span class="btn-text">Email Me</span>
                 <span class="btn-icon">→</span>
@@ -202,5 +240,8 @@
     <footer>
         <p>Created by Arabi Achraf © <span class="year">2025</span></p>
     </footer>
+
+    <!-- Import FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </body>
 </html>
