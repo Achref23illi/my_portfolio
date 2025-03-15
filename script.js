@@ -485,3 +485,449 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// First, let's create the language data structure that will hold all translatable content
+const languageData = {
+    en: {
+      // Navigation
+      home: "Home",
+      projects: "Projects",
+      skills: "Skills",
+      contact: "Contact",
+      
+      // Hero Section
+      heroGreeting: "Hi, I am",
+      heroTitle: "A Full Stack Developer and UI/UX Designer.",
+      heroDescription: "I create elegant, user-friendly digital experiences that solve complex problems with simplicity and style. Let's build something amazing together.",
+      resume: "Resume",
+      scrollDown: "Scroll Down",
+      
+      // Projects Section
+      projectsTitle: "Projects",
+      projectsSubtitle: "Recent work I've completed",
+      filterAll: "All",
+      filterMobile: "Mobile",
+      filterWeb: "Web",
+      filterDesign: "UI/UX Design",
+      viewMoreProjects: "View More Projects",
+      
+      // Skills Section
+      skillsTitle: "Skills",
+      skillsSubtitle: "Technologies I work with",
+      frontendTitle: "Frontend",
+      backendTitle: "Backend",
+      designTitle: "Design",
+      otherSkillsTitle: "Other Skills",
+      
+      // Contact Section
+      contactTitle: "Contact",
+      contactSubtitle: "Let's work together",
+      emailTitle: "Email",
+      linkedinTitle: "LinkedIn",
+      githubTitle: "GitHub",
+      yourName: "Your Name",
+      yourEmail: "Your Email",
+      subject: "Subject",
+      yourMessage: "Your Message",
+      sendMessage: "Send Message",
+      
+      // Footer
+      footerTagline: "Full Stack Developer & UI/UX Designer",
+      quickLinks: "Quick Links",
+      connect: "Connect",
+      allRightsReserved: "All rights reserved."
+    },
+    
+    fr: {
+      // Navigation
+      home: "Accueil",
+      projects: "Projets",
+      skills: "Compétences",
+      contact: "Contact",
+      
+      // Hero Section
+      heroGreeting: "Bonjour, je suis",
+      heroTitle: "Développeur Full Stack et Designer UI/UX.",
+      heroDescription: "Je crée des expériences numériques élégantes et conviviales qui résolvent des problèmes complexes avec simplicité et style. Construisons ensemble quelque chose d'extraordinaire.",
+      resume: "CV",
+      scrollDown: "Défiler vers le bas",
+      
+      // Projects Section
+      projectsTitle: "Projets",
+      projectsSubtitle: "Travaux récents que j'ai réalisés",
+      filterAll: "Tous",
+      filterMobile: "Mobile",
+      filterWeb: "Web",
+      filterDesign: "Design UI/UX",
+      viewMoreProjects: "Voir plus de projets",
+      
+      // Skills Section
+      skillsTitle: "Compétences",
+      skillsSubtitle: "Technologies avec lesquelles je travaille",
+      frontendTitle: "Frontend",
+      backendTitle: "Backend",
+      designTitle: "Design",
+      otherSkillsTitle: "Autres compétences",
+      
+      // Contact Section
+      contactTitle: "Contact",
+      contactSubtitle: "Travaillons ensemble",
+      emailTitle: "Email",
+      linkedinTitle: "LinkedIn",
+      githubTitle: "GitHub",
+      yourName: "Votre nom",
+      yourEmail: "Votre email",
+      subject: "Sujet",
+      yourMessage: "Votre message",
+      sendMessage: "Envoyer le message",
+      
+      // Footer
+      footerTagline: "Développeur Full Stack & Designer UI/UX",
+      quickLinks: "Liens rapides",
+      connect: "Connecter",
+      allRightsReserved: "Tous droits réservés."
+    },
+    
+    ar: {
+      // Navigation
+      home: "الرئيسية",
+      projects: "المشاريع",
+      skills: "المهارات",
+      contact: "اتصل بي",
+      
+      // Hero Section
+      heroGreeting: "مرحباً، أنا",
+      heroTitle: "مطور ويب شامل ومصمم واجهات المستخدم.",
+      heroDescription: "أقوم بإنشاء تجارب رقمية أنيقة وسهلة الاستخدام تحل المشكلات المعقدة ببساطة وأناقة. دعنا نبني شيئًا مذهلاً معًا.",
+      resume: "السيرة الذاتية",
+      scrollDown: "انتقل للأسفل",
+      
+      // Projects Section
+      projectsTitle: "المشاريع",
+      projectsSubtitle: "الأعمال الحديثة التي أكملتها",
+      filterAll: "الكل",
+      filterMobile: "الجوال",
+      filterWeb: "الويب",
+      filterDesign: "تصميم واجهات",
+      viewMoreProjects: "عرض المزيد من المشاريع",
+      
+      // Skills Section
+      skillsTitle: "المهارات",
+      skillsSubtitle: "التقنيات التي أعمل بها",
+      frontendTitle: "الواجهة الأمامية",
+      backendTitle: "الخلفية",
+      designTitle: "التصميم",
+      otherSkillsTitle: "مهارات أخرى",
+      
+      // Contact Section
+      contactTitle: "اتصل بي",
+      contactSubtitle: "لنعمل معًا",
+      emailTitle: "البريد الإلكتروني",
+      linkedinTitle: "لينكد إن",
+      githubTitle: "جيت هاب",
+      yourName: "اسمك",
+      yourEmail: "بريدك الإلكتروني",
+      subject: "الموضوع",
+      yourMessage: "رسالتك",
+      sendMessage: "إرسال الرسالة",
+      
+      // Footer
+      footerTagline: "مطور ويب شامل ومصمم واجهات المستخدم",
+      quickLinks: "روابط سريعة",
+      connect: "تواصل",
+      allRightsReserved: "جميع الحقوق محفوظة."
+    }
+  };
+  
+  // Function to update page content based on selected language
+  function updatePageContent(lang) {
+    // Store the selected language in local storage
+    localStorage.setItem('selectedLanguage', lang);
+    
+    // Update language selector
+    document.querySelectorAll('.language-option').forEach(option => {
+      if (option.getAttribute('data-lang') === lang) {
+        option.classList.add('active');
+      } else {
+        option.classList.remove('active');
+      }
+    });
+    
+    // Get language data
+    const data = languageData[lang];
+    
+    // Apply RTL for Arabic, LTR for others
+    if (lang === 'ar') {
+      document.documentElement.setAttribute('dir', 'rtl');
+      document.body.classList.add('rtl-layout');
+    } else {
+      document.documentElement.setAttribute('dir', 'ltr');
+      document.body.classList.remove('rtl-layout');
+    }
+    
+    // Update navigation items
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+      const key = element.getAttribute('data-i18n');
+      if (data[key]) {
+        // Special case for input placeholders
+        if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+          element.placeholder = data[key];
+        } 
+        // Special case for labels
+        else if (element.tagName === 'LABEL') {
+          element.textContent = data[key];
+        }
+        // Default case
+        else {
+          element.textContent = data[key];
+        }
+      }
+    });
+  }
+  
+  // Detect user's preferred language from browser or location
+  async function detectUserLanguage() {
+    // First, try to get from localStorage if user has a preference
+    const storedLanguage = localStorage.getItem('selectedLanguage');
+    if (storedLanguage && languageData[storedLanguage]) {
+      return storedLanguage;
+    }
+    
+    // Try to get language from browser
+    const browserLang = navigator.language.split('-')[0]; // Get primary language code
+    
+    // Check if the language is supported
+    if (languageData[browserLang]) {
+      return browserLang;
+    }
+    
+    // If browser language is not supported, try to get location via IP
+    try {
+      const response = await fetch('https://ipapi.co/json/');
+      const data = await response.json();
+      
+      // Map country codes to languages
+      const countryToLang = {
+        // French-speaking countries
+        'FR': 'fr', 'BE': 'fr', 'CH': 'fr', 'CA': 'fr', 
+        'LU': 'fr', 'MC': 'fr', 'DZ': 'fr', 'MA': 'fr', 
+        'TN': 'fr', 'SN': 'fr', 'CI': 'fr', 'ML': 'fr',
+        
+        // Arabic-speaking countries
+        'SA': 'ar', 'AE': 'ar', 'QA': 'ar', 'KW': 'ar', 
+        'BH': 'ar', 'OM': 'ar', 'JO': 'ar', 'LB': 'ar', 
+        'SY': 'ar', 'IQ': 'ar', 'EG': 'ar', 'SD': 'ar', 
+        'LY': 'ar', 'TN': 'ar', 'DZ': 'ar', 'MA': 'ar', 'MR': 'ar'
+      };
+      
+      const countryCode = data.country_code;
+      if (countryToLang[countryCode]) {
+        return countryToLang[countryCode];
+      }
+    } catch (error) {
+      console.log('Error detecting location:', error);
+    }
+    
+    // Default to English if all else fails
+    return 'en';
+  }
+  
+  // Initialize the language settings when the DOM is loaded
+  document.addEventListener('DOMContentLoaded', async function() {
+    // Add language selector to the DOM
+    addLanguageSelectorToDOM();
+    
+    // Detect user language
+    const userLang = await detectUserLanguage();
+    
+    // Add data-i18n attributes to all elements that need translation
+    prepareElementsForTranslation();
+    
+    // Update page content with detected language
+    updatePageContent(userLang);
+    
+    // Set click handlers for language options
+    document.querySelectorAll('.language-option').forEach(option => {
+      option.addEventListener('click', function() {
+        const lang = this.getAttribute('data-lang');
+        updatePageContent(lang);
+      });
+    });
+  });
+  
+  // Function to add language selector to the DOM
+  function addLanguageSelectorToDOM() {
+    // Create language selector container
+    const languageSelector = document.createElement('div');
+    languageSelector.className = 'language-selector';
+    
+    // Create language options
+    const languages = [
+      { code: 'en', name: 'EN', flag: '🇬🇧' },
+      { code: 'fr', name: 'FR', flag: '🇫🇷' },
+      { code: 'ar', name: 'AR', flag: '🇸🇦' }
+    ];
+    
+    // Create HTML for language options
+    let languageOptionsHTML = '';
+    languages.forEach(lang => {
+      languageOptionsHTML += `
+        <button class="language-option" data-lang="${lang.code}" title="${lang.name}">
+          <span class="lang-flag">${lang.flag}</span>
+          <span class="lang-name">${lang.name}</span>
+        </button>
+      `;
+    });
+    
+    languageSelector.innerHTML = languageOptionsHTML;
+    
+    // Find the right place to insert the language selector (next to theme toggle)
+    const themeToggleContainer = document.querySelector('.theme-toggle-container');
+    
+    // Create a container for both theme toggle and language selector
+    const controlsContainer = document.createElement('div');
+    controlsContainer.className = 'header-controls';
+    
+    // Move the theme toggle to the new container and add the language selector
+    const themeToggle = document.querySelector('.theme-toggle');
+    const themeToggleClone = themeToggle.cloneNode(true);
+    
+    // Replace the original theme toggle container content with the new structure
+    themeToggleContainer.innerHTML = '';
+    controlsContainer.appendChild(languageSelector);
+    controlsContainer.appendChild(themeToggleClone);
+    themeToggleContainer.appendChild(controlsContainer);
+    
+    // Ensure the dark mode toggle still works
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    if (darkModeToggle) {
+      darkModeToggle.addEventListener('click', function() {
+        document.body.classList.toggle('dark-mode');
+        const theme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+        localStorage.setItem('theme', theme);
+      });
+    }
+  }
+  
+  // Function to add data-i18n attributes to all elements that need translation
+  function prepareElementsForTranslation() {
+    // Navigation links
+    document.querySelector('.nav-link[href="#hero"]').textContent = '';
+    document.querySelector('.nav-link[href="#hero"]').appendChild(document.createTextNode('Home'));
+    document.querySelector('.nav-link[href="#hero"]').setAttribute('data-i18n', 'home');
+    
+    document.querySelector('.nav-link[href="#projects"]').textContent = '';
+    document.querySelector('.nav-link[href="#projects"]').appendChild(document.createTextNode('Projects'));
+    document.querySelector('.nav-link[href="#projects"]').setAttribute('data-i18n', 'projects');
+    
+    document.querySelector('.nav-link[href="#skills"]').textContent = '';
+    document.querySelector('.nav-link[href="#skills"]').appendChild(document.createTextNode('Skills'));
+    document.querySelector('.nav-link[href="#skills"]').setAttribute('data-i18n', 'skills');
+    
+    document.querySelector('.nav-link[href="#contact"]').textContent = '';
+    document.querySelector('.nav-link[href="#contact"]').appendChild(document.createTextNode('Contact'));
+    document.querySelector('.nav-link[href="#contact"]').setAttribute('data-i18n', 'contact');
+    
+    // Hero section
+    const heroGreeting = document.querySelector('.hero h1');
+    const nameHighlight = heroGreeting.querySelector('.highlight');
+    const nameText = nameHighlight.textContent;
+    heroGreeting.textContent = '';
+    heroGreeting.appendChild(document.createTextNode('Hi, I am '));
+    heroGreeting.appendChild(nameHighlight);
+    heroGreeting.setAttribute('data-i18n-prefix', 'heroGreeting');
+    
+    document.querySelector('.hero h2').setAttribute('data-i18n', 'heroTitle');
+    document.querySelector('.hero p').setAttribute('data-i18n', 'heroDescription');
+    
+    const resumeBtn = document.querySelector('.btn.primary-btn .btn-text');
+    resumeBtn.setAttribute('data-i18n', 'resume');
+    
+    document.querySelector('.scroll-down span').setAttribute('data-i18n', 'scrollDown');
+    
+    // Projects section
+    document.querySelector('#projects .section-title').setAttribute('data-i18n', 'projectsTitle');
+    document.querySelector('#projects .section-subtitle').setAttribute('data-i18n', 'projectsSubtitle');
+    
+    // Project filters
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    filterBtns[0].setAttribute('data-i18n', 'filterAll'); // All
+    filterBtns[1].setAttribute('data-i18n', 'filterMobile'); // Mobile
+    filterBtns[2].setAttribute('data-i18n', 'filterWeb'); // Web
+    filterBtns[3].setAttribute('data-i18n', 'filterDesign'); // UI/UX Design
+    
+    document.querySelector('#projects .btn.outline-btn .btn-text').setAttribute('data-i18n', 'viewMoreProjects');
+    
+    // Skills section
+    document.querySelector('#skills .section-title').setAttribute('data-i18n', 'skillsTitle');
+    document.querySelector('#skills .section-subtitle').setAttribute('data-i18n', 'skillsSubtitle');
+    
+    const skillCategories = document.querySelectorAll('.skill-category h3');
+    skillCategories[0].setAttribute('data-i18n', 'frontendTitle'); // Frontend
+    skillCategories[1].setAttribute('data-i18n', 'backendTitle'); // Backend
+    skillCategories[2].setAttribute('data-i18n', 'designTitle'); // Design
+    skillCategories[3].setAttribute('data-i18n', 'otherSkillsTitle'); // Other Skills
+    
+    // Contact section
+    document.querySelector('#contact .section-title').setAttribute('data-i18n', 'contactTitle');
+    document.querySelector('#contact .section-subtitle').setAttribute('data-i18n', 'contactSubtitle');
+    
+    const contactCards = document.querySelectorAll('.contact-details h3');
+    contactCards[0].setAttribute('data-i18n', 'emailTitle'); // Email
+    contactCards[1].setAttribute('data-i18n', 'linkedinTitle'); // LinkedIn
+    contactCards[2].setAttribute('data-i18n', 'githubTitle'); // GitHub
+    
+    // Contact form
+    document.querySelector('label[for="name"]').setAttribute('data-i18n', 'yourName');
+    document.querySelector('label[for="email"]').setAttribute('data-i18n', 'yourEmail');
+    document.querySelector('label[for="subject"]').setAttribute('data-i18n', 'subject');
+    document.querySelector('label[for="message"]').setAttribute('data-i18n', 'yourMessage');
+    
+    document.querySelector('#contactForm .btn.primary-btn .btn-text').setAttribute('data-i18n', 'sendMessage');
+    
+    // Footer
+    document.querySelector('.footer-logo p').setAttribute('data-i18n', 'footerTagline');
+    document.querySelector('.footer-links h3').setAttribute('data-i18n', 'quickLinks');
+    document.querySelector('.footer-social h3').setAttribute('data-i18n', 'connect');
+    
+    // Footer links
+    const footerLinks = document.querySelectorAll('.footer-links ul li a');
+    footerLinks[0].setAttribute('data-i18n', 'home');
+    footerLinks[1].setAttribute('data-i18n', 'projects');
+    footerLinks[2].setAttribute('data-i18n', 'skills');
+    footerLinks[3].setAttribute('data-i18n', 'contact');
+  }
+  
+  // Special handling for elements with dynamic content and translations
+  function handleSpecialElements(lang) {
+    const data = languageData[lang];
+    
+    // Handle hero greeting with name
+    const heroGreeting = document.querySelector('.hero h1');
+    if (heroGreeting) {
+      const nameHighlight = heroGreeting.querySelector('.highlight');
+      if (nameHighlight) {
+        const nameText = nameHighlight.textContent;
+        heroGreeting.textContent = data.heroGreeting + ' ';
+        heroGreeting.appendChild(nameHighlight);
+      }
+    }
+    
+    // Handle the copyright text
+    const copyrightElement = document.querySelector('.footer-bottom p');
+    if (copyrightElement) {
+      const year = new Date().getFullYear();
+      copyrightElement.textContent = `© ${year} Arabi Achraf. ${data.allRightsReserved}`;
+    }
+  }
+  
+  // Update special elements when changing language
+  document.addEventListener('DOMContentLoaded', function() {
+    const languageOptions = document.querySelectorAll('.language-option');
+    languageOptions.forEach(option => {
+      option.addEventListener('click', function() {
+        const lang = this.getAttribute('data-lang');
+        handleSpecialElements(lang);
+      });
+    });
+  });
