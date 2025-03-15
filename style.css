@@ -1572,3 +1572,147 @@ footer {
     transform: scale(0.8);
   }
 }
+/* Language Selector Styles */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.language-selector {
+  display: flex;
+  align-items: center;
+  background-color: var(--primary-light);
+  border-radius: 50px;
+  padding: 5px;
+  gap: 5px;
+}
+
+.dark-mode .language-selector {
+  background-color: rgba(94, 23, 235, 0.2);
+}
+
+.language-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 5px 10px;
+  color: var(--text-dark);
+  transition: var(--transition);
+  background: transparent;
+}
+
+.language-option:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.language-option.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.lang-flag {
+  margin-right: 5px;
+  font-size: 0.9rem;
+}
+
+/* Mobile Responsive Language Selector */
+@media (max-width: 768px) {
+  .header-controls {
+    flex-direction: row;
+    position: absolute;
+    top: 20px;
+    right: 60px;
+  }
+  
+  .language-selector {
+    margin-right: 10px;
+  }
+  
+  .lang-name {
+    display: none;
+  }
+  
+  .language-option {
+    padding: 5px 8px;
+  }
+  
+  .lang-flag {
+    margin-right: 0;
+  }
+}
+
+/* RTL Support */
+.rtl-layout {
+  direction: rtl;
+  text-align: right;
+}
+
+.rtl-layout .logo,
+.rtl-layout .section-header,
+.rtl-layout .hero-content,
+.rtl-layout .contact-details,
+.rtl-layout .footer-logo {
+  text-align: right;
+}
+
+.rtl-layout .hero-buttons,
+.rtl-layout .social-links {
+  justify-content: flex-start;
+}
+
+.rtl-layout .skill-item {
+  flex-direction: row-reverse;
+}
+
+.rtl-layout .skill-progress-bar {
+  transform: scaleX(-1);
+}
+
+.rtl-layout .contact-card {
+  flex-direction: row-reverse;
+}
+
+.rtl-layout .footer-links h3::after,
+.rtl-layout .footer-social h3::after {
+  left: auto;
+  right: 0;
+}
+
+/* Adjust highlight underline for RTL */
+.rtl-layout .highlight::after {
+  left: auto;
+  right: 0;
+}
+
+/* Adjust nav link underline animation for RTL */
+.rtl-layout .nav-link::after {
+  left: auto;
+  right: 0;
+}
+
+/* Project card adjustments for RTL */
+.rtl-layout .tech-stack {
+  justify-content: flex-start;
+}
+
+/* Adjust form elements for RTL */
+.rtl-layout .form-group label {
+  left: auto;
+  right: 5px;
+}
+
+.rtl-layout .form-group .focus-border {
+  left: auto;
+  right: 0;
+}
+
+/* Ensure icons stay the right way in RTL mode */
+.rtl-layout .fa,
+.rtl-layout .fab,
+.rtl-layout .fas {
+  transform: scaleX(1);
+}
