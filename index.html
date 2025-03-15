@@ -3,245 +3,554 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
     <meta name="description" content="Arabi Achraf - Full Stack Developer and UI/UX Designer Portfolio showcasing projects and skills">
-    <!-- Add Montserrat font from Google Fonts -->
+    <meta name="keywords" content="web developer, UI/UX design, frontend, backend, full stack, portfolio">
+    <meta name="author" content="Arabi Achraf">
+    <meta name="theme-color" content="#5e17eb">
+    <meta name="msapplication-TileColor" content="#5e17eb">
+    
+    <title>Arabi Achraf | Portfolio</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    
+    <!-- Google Fonts - Preloading for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <script defer src="script.js"></script>
-    <!-- Add preload for critical assets -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Font Awesome - Preloading -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Page loading animation -->
+    <div class="page-loader">
+        <div class="loader">
+            <span class="loader-dot"></span>
+            <span class="loader-dot"></span>
+            <span class="loader-dot"></span>
+        </div>
+    </div>
+
+    <!-- Page transition effect -->
     <div class="page-transition"></div>
+    
+    <!-- Mobile navigation backdrop -->
     <div class="nav-backdrop"></div>
     
+    <!-- Floating navigation indicator -->
+    <div class="scroll-indicator">
+        <div class="scroll-indicator-progress"></div>
+    </div>
+    
+    <!-- Header/Navigation -->
     <header>
-        <a href="#" class="logo">Arabi Achraf<span class="logo-dot">.</span></a>
-        
-        <button class="mobile-menu-btn" aria-label="Toggle Navigation">
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </button>
-        
-        <nav>
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="#projects" class="nav-link">
-                        <i class="fas fa-code-branch nav-icon"></i>Projects
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#skills" class="nav-link">
-                        <i class="fas fa-laptop-code nav-icon"></i>Skills
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#contact" class="nav-link">
-                        <i class="fas fa-envelope nav-icon"></i>Contact
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <button class="theme-toggle" id="darkModeToggle" aria-label="Toggle Dark Mode">
-                        <i class="fas fa-sun toggle-icon sun-icon"></i>
-                        <i class="fas fa-moon toggle-icon moon-icon"></i>
-                    </button>
-                </li>
-            </ul>
-        </nav>
+        <div class="container header-container">
+            <a href="#" class="logo" aria-label="Arabi Achraf">
+                Arabi Achraf<span class="logo-dot">.</span>
+            </a>
+            
+            <button class="mobile-menu-btn" aria-label="Toggle Navigation">
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+            
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#hero" class="nav-link active">
+                            <i class="fas fa-home nav-icon"></i>Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#projects" class="nav-link">
+                            <i class="fas fa-code-branch nav-icon"></i>Projects
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#skills" class="nav-link">
+                            <i class="fas fa-laptop-code nav-icon"></i>Skills
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link">
+                            <i class="fas fa-envelope nav-icon"></i>Contact
+                        </a>
+                    </li>
+                    <li class="nav-item theme-toggle-container">
+                        <button class="theme-toggle" id="darkModeToggle" aria-label="Toggle Dark Mode">
+                            <i class="fas fa-sun toggle-icon sun-icon"></i>
+                            <i class="fas fa-moon toggle-icon moon-icon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </header>
     
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Hi, I am <span class="highlight">Arabi Achraf.</span></h1>
-            <h2>A Full Stack Developer and A UI/UX Designer.</h2>
-            <p>I love creating websites that not only look great but are also easy to use. I assist people in transforming challenging issues into easy, fun experiences by combining creativity and careful design.</p>
-            <div class="hero-buttons">
-                <a href="assets/resume.pdf" class="btn download-btn">
-                    <span class="btn-text">Resume</span> 
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <h1 class="fade-in-element">Hi, I am <span class="highlight">Arabi Achraf.</span></h1>
+                <h2 class="fade-in-element delay-1">A Full Stack Developer and UI/UX Designer.</h2>
+                <p class="fade-in-element delay-2">I create elegant, user-friendly digital experiences that solve complex problems with simplicity and style. Let's build something amazing together.</p>
+                <div class="hero-buttons fade-in-element delay-3">
+                    <a href="assets/resume.pdf" class="btn primary-btn" download>
+                        <i class="fas fa-file-download"></i>
+                        <span class="btn-text">Resume</span> 
+                    </a>
+                    <div class="social-links">
+                        <a href="https://github.com/Achref23illi" class="icon" aria-label="GitHub Profile" target="_blank" rel="noopener">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/achraf-arabi/" class="icon" aria-label="LinkedIn Profile" target="_blank" rel="noopener">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 3D animated background -->
+            <div class="hero-visual">
+                <div class="moving-particles"></div>
+                <div class="hero-shape"></div>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator-container">
+            <div class="scroll-down">
+                <span>Scroll Down</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title reveal-text">Projects</h2>
+                <p class="section-subtitle">Recent work I've completed</p>
+            </div>
+            
+            <div class="project-filter">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="mobile">Mobile</button>
+                <button class="filter-btn" data-filter="web">Web</button>
+                <button class="filter-btn" data-filter="design">UI/UX Design</button>
+            </div>
+            
+            <div class="project-container">
+                <!-- Project 1 -->
+                <div class="project" data-category="mobile">
+                    <div class="project-image">
+                        <img src="assets/wassalniLogo.png" alt="Wassalni App" loading="lazy">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://github.com/Achref23illi/wassalni-app-memoire" class="project-link" aria-label="GitHub Repository" target="_blank" rel="noopener">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Wassalni App</h3>
+                        <p>Ride-sharing mobile application with real-time communication and location tracking.</p>
+                        <div class="tech-stack">
+                            <span>React Native</span>
+                            <span>Node.js</span>
+                            <span>MongoDB</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project" data-category="web">
+                    <div class="project-image">
+                        <img src="assets/dripdrop.png" alt="Dripdrop Dz Shop" loading="lazy">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://dripdropdz.com/" class="project-link" aria-label="Live Demo" target="_blank" rel="noopener">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Dripdrop Dz Shop</h3>
+                        <p>A modern e-commerce platform for clothing with seamless shopping experience.</p>
+                        <div class="tech-stack">
+                            <span>WordPress</span>
+                            <span>Hanout</span>
+                            <span>Elementor</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project" data-category="mobile">
+                    <div class="project-image">
+                        <img src="assets/clinicall.jpg" alt="Clinicall App" loading="lazy">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="project-link" aria-label="GitHub Repository">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Clinicall App</h3>
+                        <p>Healthcare app that helps patients with diagnosis and guides them to appropriate care.</p>
+                        <div class="tech-stack">
+                            <span>Flutter</span>
+                            <span>Firebase</span>
+                            <span>Firestore</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="project" data-category="design">
+                    <div class="project-image">
+                        <img src="assets/wassalniUIUX.png" alt="Wassalni UI/UX Design" loading="lazy">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://www.figma.com/design/JZQG4H3pDk4wQPc3SLUdKx/WASSALNI?node-id=0-1&t=PnDBnNNsSPX0F4NR-1" class="project-link" aria-label="Live Demo" target="_blank" rel="noopener">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Wassalni Project UI/UX</h3>
+                        <p>Comprehensive UI/UX design for the Wassalni ride-sharing application.</p>
+                        <div class="tech-stack">
+                            <span>Figma</span>
+                            <span>Inkscape</span>
+                            <span>Animation</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 5 -->
+                <div class="project" data-category="web">
+                    <div class="project-image">
+                        <img src="assets/battery_health_monitor.png" alt="Battery Health Monitor" loading="lazy">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://github.com/Achref23illi/battery_health_monitor" class="project-link" aria-label="GitHub Repository" target="_blank" rel="noopener">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Battery Health Monitor</h3>
+                        <p>A Python-based desktop application to monitor and visualize battery health using Windows' built-in power reports.</p>
+                        <div class="tech-stack">
+                            <span>Python</span>
+                            <span>Tkinter</span>
+                            <span>BeautifulSoup</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <a href="https://github.com/Achref23illi" target="_blank" rel="noopener" class="btn outline-btn">
+                    <span class="btn-text">View More Projects</span>
+                    <i class="fas fa-arrow-right"></i>
                 </a>
-                <a href="https://github.com/Achref23illi" class="icon" aria-label="GitHub Profile">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/achraf-arabi/" class="icon" aria-label="LinkedIn Profile">
-                    <i class="fab fa-linkedin-in"></i>
-                </a>
-            </div>
-        </div>
-        <!-- Animated shapes for background will be added via JS -->
-        <div class="moving-particles"></div>
-    </section>
-    
-    <section id="projects">
-        <h2 class="section-title">PROJECTS</h2>
-        <div class="project-container">
-            <div class="project" data-aos="fade-up">
-                <div class="project-image">
-                    <img src="assets/wassalniLogo.png" alt="Wassalni App">
-                    <div class="project-overlay">
-                        <div class="project-links">
-                            <a href="https://github.com/Achref23illi/wassalni-app-memoire" class="icon" aria-label="GitHub Repository">
-                                <i class="fab fa-github"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <h3>Wassalni App</h3>
-                <p>ride-sharing app with real-time communication.</p>
-                <div class="tech-stack">
-                    <span>React Native</span>
-                    <span>Node.js & Express.js</span>
-                    <span>MongoDB</span>
-                </div>
-            </div>
-            <div class="project" data-aos="fade-up" data-aos-delay="100">
-                <div class="project-image">
-                    <img src="assets/dripdrop.png" alt="Project 2">
-                    <div class="project-overlay">
-                        <div class="project-links">
-                            <a href="https://dripdropdz.com/" class="icon" aria-label="Live Demo">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <h3>Dripdrop Dz Shop</h3>
-                <p>A online Clothing Shop</p>
-                <div class="tech-stack">
-                    <span>Wordpress</span>
-                    <span>Hanout</span>
-                    <span>Elementor</span>
-                </div>
-            </div>
-            <div class="project" data-aos="fade-up" data-aos-delay="200">
-                <div class="project-image">
-                    <img src="assets/clinicall.jpg" alt="Project 3">
-                    <div class="project-overlay">
-                        <div class="project-links">
-                            <a href="#" class="icon" aria-label="GitHub Repository">
-                                <i class="fab fa-github"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <h3>clinicall App</h3>
-                <p>Healthcare app that help patients with diagnosis and guding them</p>
-                <div class="tech-stack">
-                    <span>Flutter</span>
-                    <span>Firebase</span>
-                    <span>Firestore</span>
-                </div>
-            </div>
-            <div class="project" data-aos="fade-up" data-aos-delay="100">
-                <div class="project-image">
-                    <img src="assets/wassalniUIUX.png" alt="Project 2">
-                    <div class="project-overlay">
-                        <div class="project-links">
-                            <a href="https://www.figma.com/design/JZQG4H3pDk4wQPc3SLUdKx/WASSALNI?node-id=0-1&t=PnDBnNNsSPX0F4NR-1" class="icon" aria-label="Live Demo">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <h3>Wassalni Project UI/UX</h3>
-                <p>UI/UX Design for Wassalni App</p>
-                <div class="tech-stack">
-                    <span>Figma</span>
-                    <span>Inkscape</span>
-                    <span>Animation</span>
-                </div>
-            </div>
-            <div class="project" data-aos="fade-up" data-aos-delay="100">
-                <div class="project-image">
-                    <img src="assets/battery_health_monitor.png" alt="Battery Health Monitor">
-                    <div class="project-overlay">
-                        <div class="project-links">
-                            <a href="https://github.com/Achref23illi/battery_health_monitor" class="icon" aria-label="GitHub Repository">
-                                <i class="fab fa-github"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <h3>Battery Health Monitor</h3>
-                <p>A Python-based desktop application to monitor and visualize battery health using Windows' built-in power report.</p>
-                <div class="tech-stack">
-                    <span>Python</span>
-                    <span>Tkinter</span>
-                    <span>BeautifulSoup</span>
-                </div>
             </div>
         </div>
     </section>
     
-    <section id="skills">
-        <h2 class="section-title">SKILLS</h2>
-        <div class="skills-container">
-            <span>HTML</span>
-            <span>CSS</span>
-            <span>JavaScript</span>
-            <span>React</span>
-            <span>Node.js</span>
-            <span>Express</span>
-            <span>MongoDB</span>
-            <span>SQL</span>
-            <span>REST APIs</span>
-            <span>Next.js</span>
-            <span>Python</span>
-            <span>UI/UX Design</span>
-            <span>Responsive Design</span>
-            <span>Web Accessibility</span>
-            <span>SEO</span>
-            <span>Performance Optimization</span>
-            <span>Redux</span>
-            <span>Material UI</span>
-            <span>Git</span>
+    <!-- Skills Section -->
+    <section id="skills" class="section section-light">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title reveal-text">Skills</h2>
+                <p class="section-subtitle">Technologies I work with</p>
+            </div>
+            
+            <div class="skills-group">
+                <!-- Frontend -->
+                <div class="skill-category">
+                    <h3><i class="fas fa-code"></i> Frontend</h3>
+                    <div class="skills-container">
+                        <div class="skill-item" data-level="95">
+                            <div class="skill-icon"><i class="fab fa-html5"></i></div>
+                            <div class="skill-info">
+                                <h4>HTML</h4>
+                                <div class="skill-progress">
+                                    <div class="skill-progress-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item" data-level="90">
+                            <div class="skill-icon"><i class="fab fa-css3-alt"></i></div>
+                            <div class="skill-info">
+                                <h4>CSS</h4>
+                                <div class="skill-progress">
+                                    <div class="skill-progress-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item" data-level="85">
+                            <div class="skill-icon"><i class="fab fa-js"></i></div>
+                            <div class="skill-info">
+                                <h4>JavaScript</h4>
+                                <div class="skill-progress">
+                                    <div class="skill-progress-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item" data-level="80">
+                            <div class="skill-icon"><i class="fab fa-react"></i></div>
+                            <div class="skill-info">
+                                <h4>React</h4>
+                                <div class="skill-progress">
+                                    <div class="skill-progress-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Backend -->
+                <div class="skill-category">
+                    <h3><i class="fas fa-server"></i> Backend</h3>
+                    <div class="skills-container">
+                        <div class="skill-item" data-level="85">
+                            <div class="skill-icon"><i class="fab fa-node-js"></i></div>
+                            <div class="skill-info">
+                                <h4>Node.js</h4>
+                                <div class="skill-progress">
+                                    <div class="skill-progress-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item" data-level="80">
+                            <div class="skill-icon"><i class="fas fa-server"></i></div>
+                            <div class="skill-info">
+                                <h4>Express</h4>
+                                <div class="skill-progress">
+                                    <div class="skill-progress-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item" data-level="75">
+                            <div class="skill-icon"><i class="fas fa-database"></i></div>
+                            <div class="skill-info">
+                                <h4>MongoDB</h4>
+                                <div class="skill-progress">
+                                    <div class="skill-progress-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item" data-level="70">
+                            <div class="skill-icon"><i class="fas fa-database"></i></div>
+                            <div class="skill-info">
+                                <h4>SQL</h4>
+                                <div class="skill-progress">
+                                    <div class="skill-progress-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Design -->
+                <div class="skill-category">
+                    <h3><i class="fas fa-palette"></i> Design</h3>
+                    <div class="skills-container">
+                        <div class="skill-item" data-level="90">
+                            <div class="skill-icon"><i class="fas fa-pen-nib"></i></div>
+                            <div class="skill-info">
+                                <h4>UI/UX Design</h4>
+                                <div class="skill-progress">
+                                    <div class="skill-progress-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item" data-level="85">
+                            <div class="skill-icon"><i class="fas fa-mobile-alt"></i></div>
+                            <div class="skill-info">
+                                <h4>Responsive Design</h4>
+                                <div class="skill-progress">
+                                    <div class="skill-progress-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item" data-level="75">
+                            <div class="skill-icon"><i class="fab fa-figma"></i></div>
+                            <div class="skill-info">
+                                <h4>Figma</h4>
+                                <div class="skill-progress">
+                                    <div class="skill-progress-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Other Skills -->
+                <div class="skill-category">
+                    <h3><i class="fas fa-tools"></i> Other Skills</h3>
+                    <div class="skills-tags">
+                        <span>Next.js</span>
+                        <span>Redux</span>
+                        <span>Git</span>
+                        <span>REST APIs</span>
+                        <span>Material UI</span>
+                        <span>Web Accessibility</span>
+                        <span>SEO</span>
+                        <span>Performance Optimization</span>
+                        <span>Python</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
     
-    <section id="contact">
-        <h2 class="section-title">CONTACT</h2>
-        <p>Interested in working together? Let's connect!</p>
-        <form action="mailto:achraf.arabi@yahoo.com" method="post" enctype="text/plain" class="contact-form">
-            <div class="form-group">
-                <input type="text" name="name" placeholder="Your Name" required>
-                <span class="focus-border"></span>
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title reveal-text">Contact</h2>
+                <p class="section-subtitle">Let's work together</p>
             </div>
-            <div class="form-group">
-                <input type="email" name="email" placeholder="Your Email" required>
-                <span class="focus-border"></span>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <a href="mailto:achraf.arabi@yahoo.com">achraf.arabi@yahoo.com</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-linkedin"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>LinkedIn</h3>
+                            <a href="https://www.linkedin.com/in/achraf-arabi/" target="_blank" rel="noopener">linkedin.com/in/achraf-arabi</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>GitHub</h3>
+                            <a href="https://github.com/Achref23illi" target="_blank" rel="noopener">github.com/Achref23illi</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form-container">
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" required>
+                            <label for="name">Your Name</label>
+                            <span class="focus-border"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" required>
+                            <label for="email">Your Email</label>
+                            <span class="focus-border"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" id="subject" name="subject" required>
+                            <label for="subject">Subject</label>
+                            <span class="focus-border"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea id="message" name="message" required></textarea>
+                            <label for="message">Your Message</label>
+                            <span class="focus-border"></span>
+                        </div>
+                        
+                        <button type="submit" class="btn primary-btn btn-block">
+                            <span class="btn-text">Send Message</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <textarea name="message" placeholder="Your Message" required></textarea>
-                <span class="focus-border"></span>
-            </div>
-            <button type="submit" class="btn contact-btn">
-                <span class="btn-text">Email Me</span>
-                <span class="btn-icon">→</span>
-            </button>
-        </form>
-        <div class="social-links">
-            <a href="https://github.com/Achref23illi" class="icon" aria-label="GitHub Profile">
-                <i class="fab fa-github"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/achraf-arabi/" class="icon" aria-label="LinkedIn Profile">
-                <i class="fab fa-linkedin-in"></i>
-            </a>
         </div>
     </section>
     
+    <!-- Footer -->
     <footer>
-        <p>Created by Arabi Achraf © <span class="year">2025</span></p>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="#" class="logo">Arabi Achraf<span class="logo-dot">.</span></a>
+                    <p>Full Stack Developer & UI/UX Designer</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#hero">Home</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#skills">Skills</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-social">
+                    <h3>Connect</h3>
+                    <div class="social-links">
+                        <a href="https://github.com/Achref23illi" class="icon" aria-label="GitHub Profile" target="_blank" rel="noopener">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/achraf-arabi/" class="icon" aria-label="LinkedIn Profile" target="_blank" rel="noopener">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; <span class="current-year"></span> Arabi Achraf. All rights reserved.</p>
+                <div class="back-to-top">
+                    <a href="#hero" aria-label="Back to top">
+                        <i class="fas fa-arrow-up"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
     </footer>
 
-    <!-- Import FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Custom JS -->
+    <script defer src="script.js"></script>
 </body>
 </html>
